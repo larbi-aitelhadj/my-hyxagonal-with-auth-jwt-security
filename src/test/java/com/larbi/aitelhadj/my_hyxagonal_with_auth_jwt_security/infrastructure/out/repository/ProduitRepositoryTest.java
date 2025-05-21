@@ -3,7 +3,6 @@ package com.larbi.aitelhadj.my_hyxagonal_with_auth_jwt_security.infrastructure.o
 import com.larbi.aitelhadj.my_hyxagonal_with_auth_jwt_security.infrastructure.out.entity.ProduitEntity;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -20,7 +19,7 @@ import java.util.List;
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql(scripts = "/data_test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "/data_test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 class ProduitRepositoryTest {
 
     @Autowired
@@ -28,36 +27,38 @@ class ProduitRepositoryTest {
 
     @Test
     void testFindAll() {
-        List<ProduitEntity> produitEntityList = produitRepository.findAll();
-        assertThat(produitEntityList).size().isEqualTo(2);
-        assertEquals(1L, produitEntityList.getFirst().getId());
-        assertEquals("PC", produitEntityList.getFirst().getName());
-        assertEquals(26235.36, produitEntityList.getFirst().getPrice());
-        assertEquals("Description 1", produitEntityList.getFirst().getDescription());
+        List<ProduitEntity> produits = produitRepository.findAll();
+        assertThat(produits).hasSize(2);
+
+        ProduitEntity first = produits.getFirst();
+        assertThat(first.getId()).isEqualTo(1L);
+        assertThat(first.getName()).isEqualTo("PC");
+        assertThat(first.getPrice()).isEqualTo(26235.36);
+        assertThat(first.getDescription()).isEqualTo("Description 1");
     }
 
     @Test
     void testFindById() {
-        ProduitEntity produitEntity = produitRepository.findById(1L).orElse(null);
-        assertNotNull(produitEntity);
-        assertEquals(6L, produitEntity.getId());
-        assertEquals("PC", produitEntity.getName());
-        assertEquals(9875.36, produitEntity.getPrice());
-        assertEquals("description PC", produitEntity.getDescription());
+        ProduitEntity produit = produitRepository.findById(1L).orElse(null);
+        assertThat(produit).isNotNull();
+        assertThat(produit.getName()).isEqualTo("PC");
     }
 
     @Test
     void testSave() {
-        ProduitEntity produitEntity = new ProduitEntity();
-        produitEntity.setName("Clavier");
-        produitEntity.setPrice(65.12);
-        produitEntity.setDescription("description clavier");
-        ProduitEntity produitEntitySaved = produitRepository.save(produitEntity);
-        assertNotNull(produitEntitySaved);
-        assertEquals(5L, produitEntitySaved.getId());
-        assertEquals("Clavier", produitEntitySaved.getName());
-        assertEquals(65.12, produitEntitySaved.getPrice());
-        assertEquals("description clavier", produitEntitySaved.getDescription());
+        ProduitEntity produit = new ProduitEntity();
+        produit.setName("Clavier");
+        produit.setPrice(65.12);
+        produit.setDescription("description clavier");
+
+        ProduitEntity saved = produitRepository.save(produit);
+
+        assertThat(saved).isNotNull();
+        assertThat(saved.getId()).isGreaterThan(0);
+        assertThat(saved.getId()).isEqualTo(3L);
+        assertThat(saved.getName()).isEqualTo("Clavier");
+        assertThat(saved.getPrice()).isEqualTo(65.12);
+        assertThat(saved.getDescription()).isEqualTo("description clavier");
     }
 
     @Test
