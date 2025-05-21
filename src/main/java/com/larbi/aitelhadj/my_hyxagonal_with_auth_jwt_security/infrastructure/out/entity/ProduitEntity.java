@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  */
 @Entity
-@Table(name = "produit", schema = "gestion_produits")
+@Table(name = "produit")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
