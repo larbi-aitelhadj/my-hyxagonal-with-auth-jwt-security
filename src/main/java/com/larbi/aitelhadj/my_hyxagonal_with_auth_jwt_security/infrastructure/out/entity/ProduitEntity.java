@@ -5,11 +5,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 
+/**
+ * @larbi.aitelhadj
+ *
+ *
+ */
 @Entity
-@Table(name = "produit")
+@Table(name = "produit", schema = "gestion_produits")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -5,10 +5,15 @@ import com.larbi.aitelhadj.my_hyxagonal_with_auth_jwt_security.infrastructure.ou
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+/**
+ * @larbi.aitelhadj
+ *
+ *
+ */
 @Service
 public class ProduitService {
 
-    private ProduitRepositoryAdapter produitRepositoryAdapter;
+    private final ProduitRepositoryAdapter produitRepositoryAdapter;
 
     ProduitService(ProduitRepositoryAdapter produitRepositoryAdapter) {
         this.produitRepositoryAdapter = produitRepositoryAdapter;

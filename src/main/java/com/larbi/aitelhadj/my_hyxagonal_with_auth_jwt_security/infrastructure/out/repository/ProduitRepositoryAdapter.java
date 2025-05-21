@@ -7,6 +7,11 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @larbi.aitelhadj
+ *
+ *
+ */
 @Component
 public class ProduitRepositoryAdapter implements ProduitRepositoryPort {
 

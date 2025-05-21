@@ -1,5 +1,10 @@
 package com.larbi.aitelhadj.my_hyxagonal_with_auth_jwt_security.domain.model;
 
+/**
+ * @larbi.aitelhadj
+ *
+ *
+ */
 public class Produit {
 
     private Long id;

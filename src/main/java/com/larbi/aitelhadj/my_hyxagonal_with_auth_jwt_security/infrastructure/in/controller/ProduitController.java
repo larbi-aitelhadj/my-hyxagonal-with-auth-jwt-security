@@ -6,11 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * @larbi.aitelhadj
+ *
+ *
+ */
 @RestController
 @RequestMapping("/produits")
 public class ProduitController {
 
-    private ProduitService produitService;
+    private final ProduitService produitService;
 
     public ProduitController(ProduitService produitService) {
         this.produitService = produitService;
